@@ -13,7 +13,6 @@ public class Playing extends GameState {
 		super(frame);
 		background =  loadImage("\\img\\playingBackground.jpg");
 		match = new Match();
-		
 	}
 
 	@Override
@@ -24,14 +23,15 @@ public class Playing extends GameState {
 
 	@Override
 	public void left() {
-		// TODO Auto-generated method stub
+		match.getYourPlayer().left();
+		frame.repaint();
 		
 	}
 
 	@Override
 	public void right() {
-		// TODO Auto-generated method stub
-		
+		match.getYourPlayer().right();
+		frame.repaint();
 	}
 
 	@Override

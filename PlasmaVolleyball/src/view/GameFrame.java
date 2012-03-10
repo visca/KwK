@@ -68,8 +68,8 @@ public class GameFrame extends Frame {
     	setState(waitingForPlayers);
     }
     
-    public void setPlaying() {
-    	if (playing == null) playing = new Playing(this);
+    public void setPlaying(boolean newMatch) {
+    	if (newMatch) playing = new Playing(this);
     	setState(playing);
     }
     

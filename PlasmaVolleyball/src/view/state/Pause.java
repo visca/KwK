@@ -19,7 +19,7 @@ public class Pause extends GameState {
 	public void enter() {
 		switch (menu.getSelectedIndex()) {
 			case 0: 
-				frame.setPlaying();
+				frame.setPlaying(false);
 				break;
 			case 1:
 				frame.setMenuGame();
@@ -29,7 +29,7 @@ public class Pause extends GameState {
 
 	@Override
 	public void escape() {
-		frame.setPlaying();
+		frame.setPlaying(false);
 	}
 	
 	@Override

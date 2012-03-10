@@ -15,9 +15,10 @@ public class WaitingForPlayers extends GameState {
 		frame.setMenuGame();
 	}
 	
+	//tymczasowo, docelowo brak zadnej reakcji na up
 	@Override
 	public void up() {
-		frame.setPlaying(); //tymczasowo, docelowo brak zadnej reakcji na up
+		frame.setPlaying(true);
 	}
 
 	@Override
