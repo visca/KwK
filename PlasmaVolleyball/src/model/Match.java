@@ -1,12 +1,9 @@
-package controller;
+package model;
 
 import java.awt.Graphics;
 
 import view.GameFrame;
 
-import model.Ball;
-import model.Net;
-import model.Player;
 
 
 public class Match {

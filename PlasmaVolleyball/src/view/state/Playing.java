@@ -2,7 +2,8 @@ package view.state;
 
 import java.awt.Graphics;
 
-import controller.Match;
+import model.Match;
+
 import view.GameFrame;
 
 
