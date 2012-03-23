@@ -68,8 +68,12 @@ public class GameFrame extends Frame {
     	setState(waitingForPlayers);
     }
     
-    public void setPlaying(boolean newMatch) {
-    	if (newMatch) playing = new Playing(this);
+    public void setNewPlaying(boolean youAreHome) {
+    	playing = new Playing(this, youAreHome);
+    	setState(playing);
+    }
+    
+    public void setPlaying() {
     	setState(playing);
     }
     

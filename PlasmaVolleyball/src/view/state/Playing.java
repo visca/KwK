@@ -9,10 +9,10 @@ import view.GameFrame;
 public class Playing extends GameState {
 	private Match match;
 
-	public Playing(GameFrame frame) {
+	public Playing(GameFrame frame, boolean youAreHome) {
 		super(frame);
 		background =  loadImage("\\img\\playingBackground.jpg");
-		match = new Match();
+		match = new Match(youAreHome);
 	}
 
 	@Override
@@ -25,7 +25,6 @@ public class Playing extends GameState {
 	public void left() {
 		match.getYourPlayer().left();
 		frame.repaint();
-		
 	}
 
 	@Override

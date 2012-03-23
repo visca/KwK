@@ -15,13 +15,13 @@ public class Match {
 	private Net net;
 	private Player yourPlayer;
 	
-	public Match() {
+	public Match(boolean youAreHome) {
 		home = new Player(100, 400, "\\img\\playingPlayerHome.png");
 		away = new Player(600, 400, "\\img\\playingPlayerAway.png");
 		ball = new Ball(370, 120, "\\img\\playingBall.png");
 		net = new Net(390, 270, "\\img\\playingNet.png");
 		
-		yourPlayer = away; // zakladam, ze steruje drugim glutem - tymczasowo
+		yourPlayer = youAreHome ? home : away;
 	}
 	
 	public void drawGameObjects(Graphics g, GameFrame frame) {
