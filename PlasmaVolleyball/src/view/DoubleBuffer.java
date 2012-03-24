@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 
+
 public abstract class DoubleBuffer extends Frame {
     private int bufferWidth;
     private int bufferHeight;
@@ -39,10 +40,11 @@ public abstract class DoubleBuffer extends Frame {
         }         
         System.gc();
 
-        bufferImage=createImage(bufferWidth,bufferHeight);
-        bufferGraphics=bufferImage.getGraphics();
+        bufferImage = createImage(bufferWidth,bufferHeight);
+        bufferGraphics = bufferImage.getGraphics();
     }
     
     public abstract void paintBuffer(Graphics g);
 
+    
 }
