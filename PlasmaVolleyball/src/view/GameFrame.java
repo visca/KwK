@@ -15,7 +15,7 @@ import view.state.Score;
 import view.state.WaitingForPlayers;
 
 
-public class GameFrame extends Frame {
+public class GameFrame extends DoubleBuffer {
 	private GameState state;
 	private GameState menuGame, waitingForPlayers, playing, pause, score;
 	private int width, height;
@@ -23,6 +23,7 @@ public class GameFrame extends Frame {
 	
     public GameFrame(int width, int height) {
     	super("Plasma Volleyball");
+    	setLocation(200, 100);
     	this.width = width;
     	this.height = height;
     	
@@ -37,9 +38,11 @@ public class GameFrame extends Frame {
         pause = new Pause(this);
         score = new Score(this);
         state = menuGame;
+        
+        
     }
     
-    public void paint(Graphics g) {
+    public void paintBuffer(Graphics g) {
     	g.drawImage(state.getBackground(), 0, 0, this);
     	
     	if (state == playing) {
@@ -58,6 +61,10 @@ public class GameFrame extends Frame {
     		// TODO
     	}
     	
+    }
+    
+    public void update(Graphics g){
+        paint(g);
     }
     
     public void setMenuGame() {
