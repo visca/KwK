@@ -2,11 +2,18 @@ package model;
 
 
 public class Player extends GameObject {
-
-	public Player(int x, int y, String pathImage) {
+	private String nick;
+	public Player(int x, int y, String pathImage, String nick) {
 		super(x, y, pathImage);
+		this.nick = nick;
 	}
 	
+	
+	public String getNick() {
+		return nick;
+	}
+
+
 	public void left() {
 		int x = getX();
 		setX(x - 10);

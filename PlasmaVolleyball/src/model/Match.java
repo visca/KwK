@@ -12,9 +12,9 @@ public class Match {
 	private Net net;
 	private Player yourPlayer;
 	
-	public Match(boolean youAreHome) {
-		home = new Player(100, 400, "\\img\\playingPlayerHome.png");
-		away = new Player(600, 400, "\\img\\playingPlayerAway.png");
+	public Match(String[] players, boolean youAreHome) {
+		home = new Player(100, 400, "\\img\\playingPlayerHome.png", players[0]); //TODO narazie tylko 2 graczy
+		away = new Player(600, 400, "\\img\\playingPlayerAway.png", players[1]);
 		ball = new Ball(370, 120, "\\img\\playingBall.png");
 		net = new Net(390, 270, "\\img\\playingNet.png");
 		
@@ -31,5 +31,18 @@ public class Match {
 	public Player getYourPlayer() {
 		return yourPlayer;
 	}
+	
+	public Player getPlayerByNick(String nick)
+	{
+		if (home.getNick().equals(nick)) {
+			return home;
+		} 
+		else if (away.getNick().equals(nick)) {
+			return away;
+		}
+		
+		return null;
+	}
 
 }
+

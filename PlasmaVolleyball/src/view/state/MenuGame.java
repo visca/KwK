@@ -1,5 +1,6 @@
 package view.state;
 
+import model.connection.SocketClient;
 import view.GameFrame;
 import view.menu.*;
 
@@ -20,6 +21,14 @@ public class MenuGame extends GameState {
 		switch (menu.getSelectedIndex()) {
 			case 0: 
 				frame.setWaitingForPlayers();
+				SocketClient socketClient = new SocketClient("localhost"); //TODO tutaj pobierzemy z menu IP Serwera
+				socketClient.setServerRequester(frame.getServerRequester());
+				socketClient.connect();
+				//char tmp = (char)((new Random().nextInt(20))+40);
+				
+				//socketClient.getClientRequester().join(Character.toString(tmp)); //TODO tutaj podamy wpierw nasz nick
+				socketClient.getClientRequester().join(frame.getYourNick());
+				frame.setSocketClient(socketClient); 
 				break;
 			case 1:
 				frame.close();

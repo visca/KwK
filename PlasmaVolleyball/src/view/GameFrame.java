@@ -5,6 +5,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
+import java.awt.geom.Point2D;
+
+import model.Player;
+import model.connection.IServerRequester;
+import model.connection.SocketClient;
 
 import view.state.GameState;
 import view.state.MenuGame;
@@ -18,9 +23,13 @@ public class GameFrame extends DoubleBuffer {
 	private GameState state;
 	private GameState menuGame, waitingForPlayers, playing, pause, score;
 	private int width, height;
+	private SocketClient socketClient = null;
+	private IServerRequester serverRequester = null;
+	private String yourNick = "Krzysztof";
 	
-	
-    public GameFrame(int width, int height) {
+
+
+	public GameFrame(int width, int height) {
     	super("Plasma Volleyball");
     	setLocation(200, 100);
     	this.width = width;
@@ -38,8 +47,38 @@ public class GameFrame extends DoubleBuffer {
         score = new Score(this);
         state = menuGame;
         
+        serverRequester =  new IServerRequester() {	
+			@Override
+			public void startGame(String[] players) {
+				if (state == waitingForPlayers) {
+					setNewPlaying(players);
+				}
+			}
+			
+			@Override
+			public void sendPositions(Point2D[] points) {
+				// TODO
+			}
+
+			@Override
+			public void MOCK_movePlayer(String nick, int move) {
+				if (state == playing) {
+					Player playerToMove = ((Playing)playing).getMatch().getPlayerByNick(nick);
+					if (move == 0) {
+						playerToMove.left();
+					} 
+					else if (move==1) {
+						playerToMove.right();
+					}
+				}
+				
+				repaint();
+			}
+		};
         
     }
+	
+	
     
     public void paintBuffer(Graphics g) {
     	g.drawImage(state.getBackground(), 0, 0, this);
@@ -74,8 +113,8 @@ public class GameFrame extends DoubleBuffer {
     	setState(waitingForPlayers);
     }
     
-    public void setNewPlaying(boolean youAreHome) {
-    	playing = new Playing(this, youAreHome);
+    public void setNewPlaying(String[] players) {
+    	playing = new Playing(this, players);
     	setState(playing);
     }
     
@@ -96,7 +135,23 @@ public class GameFrame extends DoubleBuffer {
     	repaint();
     }
     
-    public void close() {
+    public IServerRequester getServerRequester() {
+		return serverRequester;
+	}
+
+    public String getYourNick() {
+		return yourNick;
+	}
+
+	public SocketClient getSocketClient() {
+		return socketClient;
+	}
+
+	public void setSocketClient(SocketClient socketClient) {
+		this.socketClient = socketClient;
+	}
+	
+	public void close() {
     	dispose();
         System.exit(0);
     }
@@ -126,6 +181,9 @@ public class GameFrame extends DoubleBuffer {
     			case KeyEvent.VK_ESCAPE:
     				state.escape();
     				break;
+    			case KeyEvent.VK_2:
+    				yourNick = yourNick.equals("Wojciech") ? "Krzysztof" : "Wojciech"; //TODO na ten czas do zmieniania graczy
+    				break;
     		}
     		
     	}
@@ -142,8 +200,7 @@ public class GameFrame extends DoubleBuffer {
     class WindowListener extends WindowAdapter {
     	
     	@Override
-        public void windowClosing(WindowEvent e)
-        {
+        public void windowClosing(WindowEvent e) {
         	close();
         }
         

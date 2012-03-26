@@ -8,12 +8,27 @@ import view.GameFrame;
 
 
 public class Playing extends GameState {
+	public Match getMatch()
+	{
+		return match;
+	}
+
 	private Match match;
 
-	public Playing(GameFrame frame, boolean youAreHome) {
+	public Playing(GameFrame frame, String[] players) {
 		super(frame);
 		background =  loadImage("\\img\\playingBackground.jpg");
-		match = new Match(youAreHome);
+		
+		if (frame.getYourNick().equals(players[0])) {
+			match = new Match(players,true);
+		} 
+		else if (frame.getYourNick().equals(players[1])) {
+			match = new Match(players,false);
+		} 
+		else {
+			//TODO rzuc jakims wyjatkiem czy cos
+		}
+		
 	}
 
 	@Override
@@ -24,14 +39,16 @@ public class Playing extends GameState {
 
 	@Override
 	public void left() {
-		match.getYourPlayer().left();
-		frame.repaint();
+		frame.getSocketClient().getClientRequester().left();
+		//match.getYourPlayer().left();
+		//frame.repaint();
 	}
 
 	@Override
 	public void right() {
-		match.getYourPlayer().right();
-		frame.repaint();
+		frame.getSocketClient().getClientRequester().right();
+		//match.getYourPlayer().right();
+		//frame.repaint();
 	}
 
 	@Override
