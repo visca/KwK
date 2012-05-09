@@ -8,11 +8,6 @@ import view.GameFrame;
 
 
 public class Playing extends GameState {
-	public Match getMatch()
-	{
-		return match;
-	}
-
 	private Match match;
 
 	public Playing(GameFrame frame, String[] players) {
@@ -20,10 +15,10 @@ public class Playing extends GameState {
 		background =  loadImage("\\img\\playingBackground.jpg");
 		
 		if (frame.getYourNick().equals(players[0])) {
-			match = new Match(players,true);
+			match = new Match(players,this,true);
 		} 
 		else if (frame.getYourNick().equals(players[1])) {
-			match = new Match(players,false);
+			match = new Match(players,this,false);
 		} 
 		else {
 			//TODO rzuc jakims wyjatkiem czy cos
@@ -33,22 +28,24 @@ public class Playing extends GameState {
 
 	@Override
 	public void up() {
-		// TODO Auto-generated method stub
-		
+		if (!match.getYourPlayer().isAnimated()) {
+			frame.getSocketClient().getClientRequester().up();
+		}
+
 	}
 
 	@Override
 	public void left() {
-		frame.getSocketClient().getClientRequester().left();
-		//match.getYourPlayer().left();
-		//frame.repaint();
+		if (!match.getYourPlayer().isAnimated()) {
+			frame.getSocketClient().getClientRequester().left();
+		}
 	}
 
 	@Override
 	public void right() {
-		frame.getSocketClient().getClientRequester().right();
-		//match.getYourPlayer().right();
-		//frame.repaint();
+		if (!match.getYourPlayer().isAnimated()) {
+			frame.getSocketClient().getClientRequester().right();
+		}
 	}
 
 	@Override
@@ -65,5 +62,10 @@ public class Playing extends GameState {
 	public void drawGameObjects(Graphics g, GameFrame frame) {
 		match.drawGameObjects(g, frame);
 	} 
+	
+	public Match getMatch()
+	{
+		return match;
+	}
 	
 }

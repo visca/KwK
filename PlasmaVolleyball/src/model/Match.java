@@ -3,6 +3,7 @@ package model;
 import java.awt.Graphics;
 
 import view.GameFrame;
+import view.state.Playing;
 
 
 
@@ -11,14 +12,16 @@ public class Match {
 	private Ball ball;
 	private Net net;
 	private Player yourPlayer;
+	private Playing playingState;
 	
-	public Match(String[] players, boolean youAreHome) {
-		home = new Player(100, 400, "\\img\\playingPlayerHome.png", players[0]); //TODO narazie tylko 2 graczy
-		away = new Player(600, 400, "\\img\\playingPlayerAway.png", players[1]);
+	public Match(String[] players, Playing playingState, boolean youAreHome) {
+		home = new Player(100, 400, "\\img\\playingPlayerHome.png", this, players[0]); //TODO narazie tylko 2 graczy
+		away = new Player(600, 400, "\\img\\playingPlayerAway.png", this, players[1]);
 		ball = new Ball(370, 120, "\\img\\playingBall.png");
 		net = new Net(390, 270, "\\img\\playingNet.png");
 		
 		yourPlayer = youAreHome ? home : away;
+		this.playingState = playingState;
 	}
 	
 	public void drawGameObjects(Graphics g, GameFrame frame) {
@@ -42,6 +45,10 @@ public class Match {
 		}
 		
 		return null;
+	}
+	
+	public Playing getPlayingState() {
+		return playingState;
 	}
 
 }

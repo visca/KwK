@@ -51,6 +51,10 @@ public abstract class GameState {
 		frame.repaint();
 	}
 	
+	public GameFrame getFrame() {
+		return frame;
+	}
+	
 	public abstract void left();
 	public abstract void right();
 	public abstract void enter();

@@ -70,6 +70,9 @@ public class GameFrame extends DoubleBuffer {
 					else if (move==1) {
 						playerToMove.right();
 					}
+					else if (move==2) {
+						playerToMove.up();
+					}
 				}
 				
 				repaint();
@@ -142,7 +145,7 @@ public class GameFrame extends DoubleBuffer {
     public String getYourNick() {
 		return yourNick;
 	}
-
+    
 	public SocketClient getSocketClient() {
 		return socketClient;
 	}

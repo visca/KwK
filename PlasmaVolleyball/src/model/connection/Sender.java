@@ -54,7 +54,7 @@ class Sender implements IClientRequester {
 	@Override
 	public void up()
 	{
-		//TODO
+		sendMessage("<request type='move' where='2'/>");
 	}
 
 	@Override
