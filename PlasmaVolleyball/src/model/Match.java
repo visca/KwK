@@ -17,7 +17,7 @@ public class Match {
 	public Match(String[] players, Playing playingState, boolean youAreHome) {
 		home = new Player(100, 400, "\\img\\playingPlayerHome.png", this, players[0]); //TODO narazie tylko 2 graczy
 		away = new Player(600, 400, "\\img\\playingPlayerAway.png", this, players[1]);
-		ball = new Ball(370, 120, "\\img\\playingBall.png");
+		ball = new Ball(270, 180, "\\img\\playingBall.png");
 		net = new Net(390, 270, "\\img\\playingNet.png");
 		
 		yourPlayer = youAreHome ? home : away;

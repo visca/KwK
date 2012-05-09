@@ -31,7 +31,6 @@ public class Playing extends GameState {
 		if (!match.getYourPlayer().isAnimated()) {
 			frame.getSocketClient().getClientRequester().up();
 		}
-
 	}
 
 	@Override

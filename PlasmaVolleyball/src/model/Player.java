@@ -36,21 +36,21 @@ public class Player extends GameObject {
 	}
 
 	public void up() {
-		if (!isAnimated()) {
+		//if (!isAnimated()) {
 			new Thread(new Jump(1.1, 100, 240, this)).start();
-		}
+		//}
 	}
 	
 	public void left() {
-		if (!isAnimated()) {
+		//if (!isAnimated()) {
 			new Thread(new Move(0.1, 20, 20, this, true)).start();
-		}
+		//}
 	}
 	
 	public void right() {
-		if (!isAnimated()) {
+		//if (!isAnimated()) {
 			new Thread(new Move(0.1, 20, 20, this, false)).start();
-		}
+		//}
 	}
 
 }
