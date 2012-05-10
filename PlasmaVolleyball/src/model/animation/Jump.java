@@ -19,7 +19,12 @@ public class Jump implements Runnable {
 
 	@Override
 	public void run() {
-		player.setAnimated(true);
+		while (! (player.getAnimated() == null || player.getAnimated() == this)) {
+			try { Thread.sleep(10); } catch (InterruptedException e) {}
+		}
+		
+		player.setAnimated(this);
+		
 		double stepTime = (int)(animationTimePerMiliseconds/(frequencyPerSeconds+1));
 		int numberOfSteps = (int)(1.1*frequencyPerSeconds);
 		int initPlayer = player.getY();
@@ -30,7 +35,8 @@ public class Jump implements Runnable {
 			player.getMatch().getPlayingState().getFrame().repaint();
 			try { Thread.sleep((int)stepTime); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
-		player.setAnimated(false);
+		
+		player.setAnimated(null);
 	}
 	
 }

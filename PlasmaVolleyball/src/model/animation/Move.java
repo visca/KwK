@@ -19,7 +19,12 @@ public class Move implements Runnable {
 
 	@Override
 	public void run() {
-		player.setAnimated(true);
+		while (! (player.getAnimated() == null || player.getAnimated() == this)) {
+			try { Thread.sleep(10); } catch (InterruptedException e) {}
+		}
+		
+		player.setAnimated(this);
+		
 		int numberOfSteps = frequencyPerSeconds;
 		int stepTime = (int)(animationTimePerMiliseconds/(numberOfSteps+1));
 		double stepWidth = (double)width/(double)numberOfSteps;
@@ -30,7 +35,8 @@ public class Move implements Runnable {
 			player.getMatch().getPlayingState().getFrame().repaint();
 			try { Thread.sleep(stepTime); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
-		player.setAnimated(false);
+		
+		player.setAnimated(null);
 	}
 	
 }

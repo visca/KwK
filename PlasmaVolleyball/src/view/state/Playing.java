@@ -28,21 +28,21 @@ public class Playing extends GameState {
 
 	@Override
 	public void up() {
-		if (!match.getYourPlayer().isAnimated()) {
+		if (match.getYourPlayer().getAnimated() == null) {
 			frame.getSocketClient().getClientRequester().up();
 		}
 	}
 
 	@Override
 	public void left() {
-		if (!match.getYourPlayer().isAnimated()) {
+		if (match.getYourPlayer().getAnimated() == null) {
 			frame.getSocketClient().getClientRequester().left();
 		}
 	}
 
 	@Override
 	public void right() {
-		if (!match.getYourPlayer().isAnimated()) {
+		if (match.getYourPlayer().getAnimated() == null) {
 			frame.getSocketClient().getClientRequester().right();
 		}
 	}

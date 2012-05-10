@@ -6,7 +6,7 @@ import model.animation.Move;
 
 public class Player extends GameObject {
 	private String nick;
-	private boolean animated = false;
+	private Runnable animated = null;
 	private Match match;
 	
 	public Player(int x, int y, String pathImage, Match match, String nick) {
@@ -27,11 +27,11 @@ public class Player extends GameObject {
 		return match;
 	}
 	
-	public boolean isAnimated() {
+	public Runnable getAnimated() {
 		return animated;
 	}
 	
-	public void setAnimated(boolean animated) {
+	public void setAnimated(Runnable animated) {
 		this.animated = animated;
 	}
 
