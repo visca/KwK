@@ -27,11 +27,11 @@ public class Player extends GameObject {
 		return match;
 	}
 	
-	public Runnable getAnimated() {
+	public synchronized Runnable getAnimated() {
 		return animated;
 	}
 	
-	public void setAnimated(Runnable animated) {
+	public synchronized void setAnimated(Runnable animated) {
 		this.animated = animated;
 	}
 
